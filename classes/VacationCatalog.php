@@ -11,6 +11,8 @@ class VacationCatalog {
 
     /**
      * Insert a vacation request
+     * @param VacationRequest
+     * @return null
      */
     public function insertRequest(VacationRequest $request) {
 
@@ -20,7 +22,15 @@ class VacationCatalog {
         $reason = $request->getReason;
 
 
-       $stmt = $this->db->prepare("INSERT INTO vacation_requests (user_id, start_date, end_date, reason) VALUES (?, ?, ?, ?)");
+       $stmt = $this->db->prepare(
+            "INSERT INTO vacation_requests (
+                user_id, 
+                start_date,
+                end_date,
+                reason)
+            VALUES 
+            (?, ?, ?, ?)"
+        );
        return $stmt->execute([$request->getUserId(),$request->getStringStartDate(),$request->getStringEndDate(),$request->getReason()]);
     }
 
@@ -30,11 +40,13 @@ class VacationCatalog {
      */
     public function getAllRequests() {
         $stmt = $this->db->prepare(
-            "SELECT vr.*, u.full_name 
-             FROM vacation_requests vr 
-             JOIN users u ON vr.user_id = u.id 
-             ORDER BY vr.submitted_at DESC"
-        );
+            "SELECT 
+                vr.*, 
+                u.full_name 
+                FROM vacation_requests vr 
+                JOIN users u ON vr.user_id = u.id 
+            ORDER BY vr.submitted_at DESC"
+            );
         $stmt->execute();
         
         $requests = [];

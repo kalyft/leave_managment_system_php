@@ -8,17 +8,22 @@ class User {
     private $role;
     private $fullName;
     private $createdAt;
+    private $email;
+    private $updatedAt;
 
     public function __construct() {
         $this->db = (new Database())->getConnection();
     }
 
-    // Getters and Setters
+    // Getters
     public function getId() { 
         return $this->id;
     }
     public function getUsername() { 
         return $this->username; 
+    }
+    public function getPassword() { 
+        return $this->password; 
     }
     public function getRole() {
         return $this->role;
@@ -26,7 +31,18 @@ class User {
     public function getFullName() {
         return $this->fullName;
     }
+    public function getEmail(): string {
+        return $this->email;
+    }
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
 
+    //and Setters
+    public function setId(int $id): void {
+        $this->id = $id;
+    }
+    
     public function setUsername($username) {
         $this->username = $username;
     }
@@ -38,18 +54,21 @@ class User {
     public function setRole($role) {
         $this->role = $role;
     }
-    
     public function setFullName($fullName) {
         $this->fullName = $fullName;
     }
 
-    // User methods
-    public function create() {
-        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-        $stmt = $this->db->prepare("INSERT INTO users (username, password, role, full_name) VALUES (?, ?, ?, ?)");
-        return $stmt->execute([$this->username, $hashedPassword, $this->role, $this->fullName]);
+    public function setEmail(string $email): void {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException("Invalid email format");
+        }
+        $this->email = $email;
+    }
+    public function setCreatedAt($createdAt) {
+        $this->createdAt = $createdAt;
     }
 
+    // move to catalog
     public function findByUsername($username) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->execute([$username]);
@@ -58,12 +77,6 @@ class User {
 
     public function verifyPassword($inputPassword, $hashedPassword) {
         return password_verify($inputPassword, $hashedPassword);
-    }
-
-    public function getAllEmployees() {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE role = 'employee'");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 

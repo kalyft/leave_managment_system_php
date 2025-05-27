@@ -45,7 +45,10 @@ $allRequests = $catalog->getAllRequests();
                 </form>
             </div>
         </div>
-
+        
+        <!--Go to users  -->
+        <a href="users_list.php" class="btn btn-secondary">Manage Users</a>
+        
         <div class="card">
             <div class="card-header">Vacation Requests</div>
             <div class="card-body">

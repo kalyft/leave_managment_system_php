@@ -5,6 +5,7 @@ $auth = new Auth();
 $auth->redirectIfNotLoggedIn();
 $user = $auth->getCurrentUser();
 $catlog = new VacationCatalog();
+//$vacationReasonCatalog = new VacationReasonCatalog();
 
 // Handle new vacation request 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,17 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Get all my requests.
 $requests = $catlog->getUserRequests($user['id']);
 ?>
+<?php include '../includes/header.php'; ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Employee Dashboard - VMS</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <?php include '../includes/header.php'; ?>
     <div class="container mt-4">
+        <h1>Leave Management System</h1>
         <h2>Welcome, <?= $user['full_name'] ?> (Employee)</h2>
+        <!-- log out -->
+        <div class="card mb-4">
+            <div class="card-body float-right">
+                <form action="../logout.php" method="GET">
+                        <button type="submit" class="btn btn-primary mt-3 float-right">Log out</button>
+                
+                </form>
+            </div>
+        </div>
         
         <!-- Vacation Request Form -->
         <div class="card mb-4">
@@ -70,14 +74,7 @@ $requests = $catlog->getUserRequests($user['id']);
             </div>
         </div>
 
-        <!-- log out -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <form action="../logout.php" method="GET">
-                    <button type="submit" class="btn btn-primary mt-3">Log out</button>
-                </form>
-            </div>
-        </div>
+
 
         <!-- all requests -->
         <div class="card">
@@ -115,6 +112,4 @@ $requests = $catlog->getUserRequests($user['id']);
             </div>
         </div>
     </div>
-    <?php include '../includes/footer.php'; ?>
-</body>
-</html>
+<?php include '../includes/footer.php'; ?>

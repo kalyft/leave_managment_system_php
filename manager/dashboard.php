@@ -25,29 +25,29 @@ if (isset($_GET['action'])) {
 // Get all requests 
 $allRequests = $catalog->getAllRequests();
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Manager Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include '../includes/header.php'; ?>
 <body>
-    <?php include '../includes/header.php'; ?>
     <div class="container mt-4">
+        <h1>Leave Management System</h1>
         <h2>Welcome, <?= htmlspecialchars($auth->getCurrentUser()['full_name']) ?> (Manager)</h2>
-        
-        <!-- log out -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <form action="../logout.php" method="GET">
-                    <button type="submit" class="btn btn-primary mt-3">Log out</button>
-                </form>
-            </div>
-        </div>
-        
-        <!--Go to users  -->
-        <a href="users_list.php" class="btn btn-secondary">Manage Users</a>
+        <header>
+           
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link active" href="dashboard.php">Leaves' Managment</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="users_list.php">Users List</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="create_user.php">Create New User</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="../logout.php">Log Out</a>
+              </li>
+            </ul>
+        </header>
+     
         
         <div class="card">
             <div class="card-header">Vacation Requests</div>

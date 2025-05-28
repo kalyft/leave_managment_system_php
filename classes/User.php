@@ -9,7 +9,6 @@ class User {
     private $fullName;
     private $createdAt;
     private $email;
-    private $updatedAt;
 
     public function __construct() {
         $this->db = (new Database())->getConnection();

@@ -36,5 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

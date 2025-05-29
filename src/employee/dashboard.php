@@ -19,6 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+if (isset($_GET['action']) && $_GET['action'] == 'deleteRequest') {
+    $requestId = (int)$_GET['request_id'];
+    
+    if ($catlog->deleteRequest($requestId)) {
+        $success = "Request deleted";
+    } else {
+        $error = "Failed to delete request.";
+    }
+}
+
 // Get all my requests.
 $requests = $catlog->getUserRequests($user['id']);
 ?>
@@ -65,7 +75,6 @@ $requests = $catlog->getUserRequests($user['id']);
                                 <option value="maternity_leave">Maternity Leave</option>
                                 <option value="paternity_leave">Paternity Leave</option>
                                 <option value="bereavement_leave">Bereavement Leave</option>
-                                <option value="personal_leave">Personal Leave</option>
                             </select>
                         </div> 
                     </div>
@@ -88,6 +97,7 @@ $requests = $catlog->getUserRequests($user['id']);
                             <th>Duration</th>
                             <th>Reason</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,6 +114,12 @@ $requests = $catlog->getUserRequests($user['id']);
                                     ?>">
                                     <?= ucfirst($request->getStatus()) ?>
                                     </span>
+                                </td>
+                                <td>
+                                    <a href="?action=deleteRequest&request_id=<?= $request->getId() ?>" 
+                                        class="badge bg-secondary" 
+                                        <?= $request->getStatus() === 'pending' ? 'displayed' : 'hidden' ?> > Delete
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

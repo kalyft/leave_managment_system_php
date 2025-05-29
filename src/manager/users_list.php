@@ -26,7 +26,6 @@ include '../includes/header.php';
 ?>
 
 <div class="container mt-4">
-    <h2>User Management</h2>
     <a href="create_user.php" class="btn btn-primary mb-3">Create New User</a>
     
     <table class="table table-striped">

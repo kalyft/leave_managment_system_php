@@ -35,6 +35,20 @@ class VacationCatalog {
        return $stmt->execute([$request->getUserId(),$request->getStringStartDate(),$request->getStringEndDate(),$request->getReason()]);
     }
 
+     /**
+     * Delete a vacation request
+     * @param request id
+     * @return null
+     */
+    public function deleteRequest($request_id) {
+
+       $stmt = $this->db->prepare(
+            "DELETE FROM vacation_requests WHERE id = ?"
+        );
+       return $stmt->execute([$request_id]);
+    }
+
+
     /**
      * Get all vacation requests 
      * @return VacationRequest

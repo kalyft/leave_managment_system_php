@@ -47,10 +47,25 @@ class UserCatalog {
 
     /**
      * Delete user
+     * If a user has vacation requests delete them as well
      */
     public function deleteUser(int $userId): bool {
-        $stmt = $this->db->prepare("DELETE FROM users WHERE id = ?");
-        return $stmt->execute([$userId]);
+        // prep queries
+        $stmt_delete_users_vacation_requests = $this->db->prepare("DELETE FROM vacation_requests WHERE user_id = ?");
+        $stmt_delete_user = $this->db->prepare("DELETE FROM users WHERE id = ?");
+
+        $this->db->beginTransaction();
+
+        try {
+            $stmt_delete_users_vacation_requests->execute([ $userId]);
+            $stmt_delete_user->execute([$userId]);
+
+            $this->db->commit();
+            return 1;
+        } catch (\Exception $e) {
+            $this->db->rollback();
+            throw $e;
+        }
     }
 
     private function createUser(User $user): bool {

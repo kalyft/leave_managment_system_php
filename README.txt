@@ -1,14 +1,9 @@
-sudo service mysql start
 
-create db with dataloads
+in the parent directory run 
+docker-compose up --build
 
+Visit localhost:8080/index.php 
 
-start app 
-php -S localhost:2020
-
-
-
-Visit localhost:2020/index.php 
 and log in with 
 Username: admin
 Password: admin

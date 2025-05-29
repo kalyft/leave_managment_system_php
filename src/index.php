@@ -9,7 +9,7 @@ if ($auth->isLoggedIn()) {
         ? Config::path('manager/dashboard.php') 
         : Config::path('employee/dashboard.php');
     
-    require $dashboard;
+    include $dashboard;
 } else {
     require Config::path('login.php');
 }

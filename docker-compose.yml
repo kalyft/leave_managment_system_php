@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: lms_app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - lms_db
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DATABASE: lms_db
+      MYSQL_USER: debian-sys-maint
+      MYSQL_PASSWORD: Rg6OzvMTokW76fQM
+
+  lms_db:
+    image: mysql:8.0
+    container_name: lms_db
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: lms_db
+      MYSQL_USER: debian-sys-maint
+      MYSQL_PASSWORD: Rg6OzvMTokW76fQM
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
+
+volumes:
+  db_data:

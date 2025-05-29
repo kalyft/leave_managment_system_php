@@ -71,7 +71,7 @@ $allRequests = $catalog->getAllRequests();
                                 <td><?= htmlspecialchars($request->getStartDate()->format('Y-m-d')) ?> </td>
                                 <td><?= htmlspecialchars($request->getEndDate()->format('Y-m-d')) ?></td>
                                 <td><?= $request->getDuration() ?> days</td>
-                                <td><?= $request->getReason() ?> </td>
+                                <td><?= htmlspecialchars($request->getReason())?> </td>
                                 <td>
                                     <span class="badge bg-<?= 
                                         $request->getStatus() === 'approved' ? 'success' : 

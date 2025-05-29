@@ -17,10 +17,10 @@ class VacationCatalog {
      */
     public function insertRequest(VacationRequest $request) {
 
-        $user_id = $request->getUserId;
-        $start_date = $request->getStringStartDate;
-        $end_date = $request->getStringEndDate;
-        $reason = $request->getReason;
+        $user_id = $request->getUserId();
+        $start_date = $request->getStringStartDate();
+        $end_date = $request->getStringEndDate();
+        $reason = $request->getReason();
 
 
        $stmt = $this->db->prepare(

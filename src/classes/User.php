@@ -79,18 +79,4 @@ class User {
     }
 }
 
-/*
-class Employee extends User {
-    public function newVacationRequest () {
-
-    }
-}
-
-class Manager extends User {
-  
-
-    public function createEmployee() {
-
-    }
-}*/
 ?>

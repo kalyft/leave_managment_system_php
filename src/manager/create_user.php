@@ -9,7 +9,6 @@ $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = new User();
-    $user->setFullName($_POST['fullname']);
     $user->setUsername($_POST['username']);
     $user->setPassword($_POST['password']);
     $user->setEmail($_POST['email']);

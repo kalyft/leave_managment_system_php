@@ -113,7 +113,7 @@ class UserCatalog {
         $user->setEmail($row['email']);
         $user->setRole($row['role']);
         $user->setFullName($row['full_name']);
-        // Note: Password is not set from database
+        $user->setCreatedAt($row['created_at']);
         
         return $user;
     }

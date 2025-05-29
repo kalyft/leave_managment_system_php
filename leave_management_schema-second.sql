@@ -8,6 +8,7 @@ CREATE TABLE users (
     password   VARCHAR(255)                          NOT NULL,
     role       ENUM('employee', 'manager')           NOT NULL,
     full_name  VARCHAR(100)                          NOT NULL,
+    email      VARCHAR(255)                          NOT NULL,
     created_at TIMESTAMP                                      DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -44,4 +45,4 @@ INSERT INTO vacation_reasons (reason_key, label) VALUES
 ('personal_leave', 'Personal Leave');
 
 INSERT INTO users (username,password,role,full_name,email) VALUES 
-('admin','$2y$10$CpbYkV1m.PTmqxbvFwQ5pu.B/h0GnGxEZVA2fNfJgaxVT4oND/N6S','manager','Giorgos Georgiou');
+('admin','$2y$10$CpbYkV1m.PTmqxbvFwQ5pu.B/h0GnGxEZVA2fNfJgaxVT4oND/N6S','manager','Giorgos Georgiou', 'admin@lms.com');

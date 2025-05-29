@@ -22,9 +22,7 @@ enum VacationReasonCode: string {
 
 
 
-
 <?php
-// classes/VacationReason.php
 class VacationReason {
     private $id;
     private $key;

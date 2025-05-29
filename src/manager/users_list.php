@@ -48,7 +48,7 @@ include '../includes/header.php';
                 <td><?= htmlspecialchars($user->getEmail()) ?></td>
                 <td><?= ucfirst($user->getRole()) ?></td>
 
-                <td><?= date('Y-m-d H:i', strtotime($user->getCreatedAt())) ?></td>
+                <td><?= htmlspecialchars($user->getCreatedAt()) ?></td>
                 <td>
                     <a href="edit_user.php?id=<?= $user->getId() ?>" class="btn btn-sm btn-warning">Edit</a>
                     <a href="?action=deleteUser&id=<?= $user->getId() ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>

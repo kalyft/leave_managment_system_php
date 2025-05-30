@@ -32,7 +32,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'deleteRequest') {
 // Get all my requests.
 $requests = $catlog->getUserRequests($user['id']);
 ?>
-<?php include '../includes/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
     <div class="container mt-4">
         <h1>Leave Management System</h1>
@@ -128,4 +128,4 @@ $requests = $catlog->getUserRequests($user['id']);
             </div>
         </div>
     </div>
-<?php include '../includes/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

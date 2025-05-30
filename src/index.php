@@ -10,6 +10,7 @@ if ($auth->isLoggedIn()) {
         : Config::path('employee/dashboard.php');
     
     include $dashboard;
+    header("Location: $dashboard");
 } else {
     require Config::path('login.php');
 }

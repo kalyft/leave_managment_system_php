@@ -5,7 +5,6 @@ $auth = new Auth();
 $auth->redirectIfNotManager();
 
 $db = (new Database())->getConnection();
-$error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = new User();
@@ -17,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $catalog = new UserCatalog();
     if ($catalog->saveUser($user)) {
-        header("Location: users_list.php?success=1");
-        exit();
+         $success = "User Created";
+    } else {
+        $error = "Failed to create user.";
     }
 }
 
@@ -28,8 +28,10 @@ include '../includes/header.php';
 <div class="container mt-4">
     <h2>Create New User</h2>
     
-    <?php if ($error): ?>
-    <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+    <?php if (isset($success)): ?>
+        <div class="alert alert-success"><?= $success ?></div>
+    <?php elseif (isset($error)): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     
     <form method="POST">

@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/VacationRequest.php';
+//require_once 'Database.php';
+//require_once 'VacationRequest.php';
 //require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/VacationReason.php';
 
 
@@ -41,13 +42,23 @@ class VacationCatalog {
      * @return null
      */
     public function deleteRequest($request_id) {
-
        $stmt = $this->db->prepare(
             "DELETE FROM vacation_requests WHERE id = ?"
         );
        return $stmt->execute([$request_id]);
     }
 
+      /**
+     * Update a vacation request
+     * @param request id
+     * @return null
+     */
+    public function updateRequest($request_id, $status) {
+        $stmt = $this->db->prepare(
+            "UPDATE vacation_requests SET status = ? WHERE id = ?"
+        );
+        return $stmt->execute([$status, $request_id]);
+    }
 
     /**
      * Get all vacation requests 

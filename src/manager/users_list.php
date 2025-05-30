@@ -10,10 +10,9 @@ $users = $catalog->getAllUsers();
 if (isset($_GET['action']) && $_GET['action'] == 'deleteUser') {
     try {
     	$userId = (int)$_GET['id'];
-		$catalog = new UserCatalog();
 
         if ($catalog->deleteUser($userId)) {
-            header("Location: users_list.php?success=1");
+            header("Location: users_list.php");
             exit();
         }
     } catch (Exception $e) {

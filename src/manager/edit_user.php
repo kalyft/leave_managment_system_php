@@ -4,7 +4,6 @@ require_once '../init.php';
 $auth = new Auth();
 $auth->redirectIfNotManager();
 
-$db = (new Database())->getConnection();
 $userId = (int)$_GET['id'];
 $catalog = new UserCatalog();
 $user = $catalog->findById($userId);
@@ -28,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Move this to catalog
         if ($catalog->saveUser($user)) {
-            header("Location: users_list.php?success=1");
+            header("Location: users_list.php");
             exit();
         }
     } catch (Exception $e) {
@@ -37,6 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 include '../includes/header.php';
+$userId = (int)$_GET['id'];
+$catalog = new UserCatalog();
+$user = $catalog->findById($userId);
 ?>
 
 <div class="container mt-4">
@@ -49,6 +51,7 @@ include '../includes/header.php';
     <form method="POST">
         <div class="mb-3">
             <label class="form-label">Username</label>
+            <!-- User wtf -->
             <input type="text" name="username" class="form-control" 
                    value="<?= htmlspecialchars($user->getUsername()) ?>" required>
         </div>

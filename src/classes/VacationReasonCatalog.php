@@ -36,6 +36,17 @@ class VacationReasonCatalog {
     }
 
     /**
+     * Find reason by key
+     */
+    public function findById(string $reasonId): ?VacationReason {
+        $stmt = $this->db->prepare("SELECT * FROM vacation_reasons WHERE id = ?");
+        $stmt->execute([$reasonId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $row ? $this->createReasonFromRow($row) : null;
+    }
+
+    /**
      * Validate if reason exists and is active
      */
     public function isValidReason(string $reasonKey): bool {

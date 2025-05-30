@@ -59,7 +59,7 @@ class VacationReason {
     public function setLabel(string $label): void {
         $this->label = $label;
     }    
-    public function setisActive(boolean $isActive): void {
+    public function setIsActive(boolean $isActive): void {
         $this->isActive = $isActive;
     }
 }

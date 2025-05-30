@@ -28,10 +28,14 @@ class UserCatalog {
      * Find user by ID
      */
     public function findById(int $id): ?User {
-        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare(
+            "SELECT * FROM users WHERE id = ?"
+        );
         
+        $stmt->execute([$id]);
+        
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
         return $row ? $this->createUserFromRow($row) : null;
     }
 

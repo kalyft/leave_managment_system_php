@@ -6,23 +6,19 @@ $auth = new Auth();
 $auth->redirectIfNotLoggedIn();
 $auth->redirectIfNotManager();
 
-$catalog = new VacationCatalog();
-
 // Handle approve/reject actions
 if (isset($_GET['action'])) {
     $status = ($_GET['action'] === 'approve') ? 'approved' : 'rejected';
+    $catalog = new VacationCatalog();
     $requestId = (int)$_GET['request_id'];
-    
-    // VacationCatalog to handle this
-    $db = (new Database())->getConnection();
-    $stmt = $db->prepare("UPDATE vacation_requests SET status = ? WHERE id = ?");
-    $stmt->execute([$status, $requestId]);
-    
-    header("Location: /manager/dashboard.php");
+    $catalog->updateRequest($requestId, $status);
+   
+    header("Location: dashboard.php");
     exit();
 }
 
 // Get all requests 
+$catalog = new VacationCatalog();
 $allRequests = $catalog->getAllRequests();
 ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>

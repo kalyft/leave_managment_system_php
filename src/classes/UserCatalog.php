@@ -14,7 +14,23 @@ class UserCatalog {
      * @return User[]
      */
     public function getAllUsers(): array {
-        $stmt = $this->db->query("SELECT * FROM users ORDER BY created_at DESC");
+        $stmt = $this->db->query("SELECT * FROM tUser ORDER BY created_at DESC");
+        $users = [];
+        
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $users[] = $this->createUserFromRow($row);
+        }
+        
+        return $users;
+    }
+
+
+    /**
+     * Get all employee users
+     * @return User[]
+     */
+    public function getAllEmployees(): array {
+        $stmt = $this->db->query("SELECT * FROM tUser WHERE role = 'employee' ORDER BY created_at DESC");
         $users = [];
         
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -29,7 +45,7 @@ class UserCatalog {
      */
     public function findById(int $id): ?User {
         $stmt = $this->db->prepare(
-            "SELECT * FROM users WHERE id = ?"
+            "SELECT * FROM tUser WHERE id = ?"
         );
         
         $stmt->execute([$id]);
@@ -55,8 +71,8 @@ class UserCatalog {
      */
     public function deleteUser(int $userId): bool {
         // prep queries
-        $stmt_delete_users_vacation_requests = $this->db->prepare("DELETE FROM vacation_requests WHERE user_id = ?");
-        $stmt_delete_user = $this->db->prepare("DELETE FROM users WHERE id = ?");
+        $stmt_delete_users_vacation_requests = $this->db->prepare("DELETE FROM tVacationRequest WHERE user_id = ?");
+        $stmt_delete_user = $this->db->prepare("DELETE FROM tUser WHERE id = ?");
 
         $this->db->beginTransaction();
 
@@ -75,7 +91,7 @@ class UserCatalog {
     private function createUser(User $user): bool {
         $stmt = $this->db->prepare(
             "INSERT INTO 
-                users 
+                tUser 
             (username, password, email, role, full_name) 
             VALUES 
             (?, ?, ?, ?, ?)"
@@ -95,7 +111,7 @@ class UserCatalog {
         // Update without password
         if (empty($user->getPassword())) {
             $stmt = $this->db->prepare(
-                "UPDATE users SET 
+                "UPDATE tUser SET 
                  username = ?, email = ?, role = ?, full_name = ?
                  WHERE id = ?"
             );
@@ -110,7 +126,7 @@ class UserCatalog {
         
         // Update with password
         $stmt = $this->db->prepare(
-            "UPDATE users SET 
+            "UPDATE tUser SET 
              username = ?, password = ?, email = ?, role = ?, full_name = ?
              WHERE id = ?"
         );

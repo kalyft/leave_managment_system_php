@@ -14,7 +14,7 @@ class VacationReasonCatalog {
      * @return VacationReason[]
      */
     public function getActiveReasons(): array {
-        $stmt = $this->db->query("SELECT * FROM vacation_reasons WHERE is_active = TRUE ORDER BY label");
+        $stmt = $this->db->query("SELECT * FROM tVacationReason WHERE is_active = TRUE ORDER BY label");
         $reasons = [];
         
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -28,7 +28,7 @@ class VacationReasonCatalog {
      * Find reason by key
      */
     public function findByKey(string $reasonKey): ?VacationReason {
-        $stmt = $this->db->prepare("SELECT * FROM vacation_reasons WHERE reason_key = ?");
+        $stmt = $this->db->prepare("SELECT * FROM tVacationReason WHERE reason_key = ?");
         $stmt->execute([$reasonKey]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -39,7 +39,7 @@ class VacationReasonCatalog {
      * Find reason by key
      */
     public function findById(string $reasonId): ?VacationReason {
-        $stmt = $this->db->prepare("SELECT * FROM vacation_reasons WHERE id = ?");
+        $stmt = $this->db->prepare("SELECT * FROM tVacationReason WHERE id = ?");
         $stmt->execute([$reasonId]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -51,7 +51,7 @@ class VacationReasonCatalog {
      */
     public function isValidReason(string $reasonKey): bool {
         $stmt = $this->db->prepare(
-            "SELECT COUNT(*) FROM vacation_reasons 
+            "SELECT COUNT(*) FROM tVacationReason 
              WHERE reason_key = ? AND is_active = TRUE"
         );
         $stmt->execute([$reasonKey]);

@@ -5,7 +5,7 @@ $auth = new Auth();
 $auth->redirectIfNotManager();
 
 $catalog = new UserCatalog();
-$users = $catalog->getAllUsers();
+$users = $catalog->getAllEmployees();
 
 if (isset($_GET['action']) && $_GET['action'] == 'deleteUser') {
     try {

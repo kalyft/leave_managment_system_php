@@ -1,9 +1,4 @@
 <?php
-//require_once 'Database.php';
-//require_once 'VacationRequest.php';
-//require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/VacationReason.php';
-
-
 class VacationCatalog {
     private $db;
     
@@ -25,7 +20,7 @@ class VacationCatalog {
 
 
        $stmt = $this->db->prepare(
-            "INSERT INTO vacation_requests (
+            "INSERT INTO tVacationRequest (
                 user_id, 
                 start_date,
                 end_date,
@@ -43,7 +38,7 @@ class VacationCatalog {
      */
     public function deleteRequest($request_id) {
        $stmt = $this->db->prepare(
-            "DELETE FROM vacation_requests WHERE id = ?"
+            "DELETE FROM tVacationRequest WHERE id = ?"
         );
        return $stmt->execute([$request_id]);
     }
@@ -55,7 +50,7 @@ class VacationCatalog {
      */
     public function updateRequest($request_id, $status) {
         $stmt = $this->db->prepare(
-            "UPDATE vacation_requests SET status = ? WHERE id = ?"
+            "UPDATE tVacationRequest SET status = ? WHERE id = ?"
         );
         return $stmt->execute([$status, $request_id]);
     }
@@ -69,8 +64,8 @@ class VacationCatalog {
             "SELECT 
                 vr.*, 
                 u.full_name 
-                FROM vacation_requests vr 
-                JOIN users u ON vr.user_id = u.id 
+                FROM tVacationRequest vr 
+                JOIN tUser u ON vr.user_id = u.id 
             ORDER BY vr.submitted_at DESC"
             );
         $stmt->execute();
@@ -92,8 +87,8 @@ class VacationCatalog {
         
         $stmt = $this->db->prepare(
             "SELECT vr.* 
-             FROM vacation_requests vr 
-             JOIN users u ON vr.user_id = u.id 
+             FROM tVacationRequest vr 
+             JOIN tUser u ON vr.user_id = u.id 
              WHERE vr.user_id = ?
              ORDER BY vr.submitted_at DESC"
         );
@@ -120,8 +115,8 @@ class VacationCatalog {
         $stmt = $this->db->prepare(
             "SELECT vr.*,
               u.full_name 
-             FROM vacation_requests vr 
-             JOIN users u ON vr.user_id = u.id 
+             FROM tVacationRequest vr 
+             JOIN tUser u ON vr.user_id = u.id 
              WHERE vr.status = ?
              ORDER BY vr.submitted_at DESC"
         );

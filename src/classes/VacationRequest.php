@@ -81,17 +81,6 @@ class VacationRequest {
         $this->submittedAt = $submittedAt;
     }
 
-    public function updateStatus($requestId, $status) {
-        $stmt = $this->db->prepare("UPDATE vacation_requests SET status = ? WHERE id = ?");
-        return $stmt->execute([$status, $requestId]);
-    }
-
-    public function getUserRequests($userId) {
-        $stmt = $this->db->prepare("SELECT * FROM vacation_requests WHERE user_id = ? ORDER BY submitted_at DESC");
-        $stmt->execute([$userId]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
     public function setUserName($name) {
         $this->userName = $name;
     }
@@ -104,13 +93,6 @@ class VacationRequest {
         $start = $this->startDate;
         $end = $this->endDate;
         return $start->diff($end)->days + 1; // +1 to include both start and end dates
-    }
-
-    // go to catalog
-    public function getAllRequests() {
-        $stmt = $this->db->prepare("SELECT vr.*, u.full_name FROM vacation_requests vr JOIN users u ON vr.user_id = u.id");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

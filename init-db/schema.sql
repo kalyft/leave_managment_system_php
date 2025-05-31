@@ -2,7 +2,7 @@
 USE lms_db;
 
 -- Users table
-CREATE TABLE users (
+CREATE TABLE tUser (
     id         INT         AUTO_INCREMENT PRIMARY KEY,
     username   VARCHAR(50)                           NOT NULL UNIQUE,
     password   VARCHAR(255)                          NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE users (
 );
 
 -- Vacation requests
-CREATE TABLE vacation_requests (
+CREATE TABLE tVacationRequest (
     id               INT AUTO_INCREMENT PRIMARY KEY,
     user_id          INT                            NOT NULL,
     start_date       DATE                           NOT NULL,
@@ -21,8 +21,7 @@ CREATE TABLE vacation_requests (
     reason           ENUM('sick_leave', 'holiday', 'maternity_leave', 'paternity_leave') DEFAULT 'holiday' NOT NULL,
     status           ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     submitted_at     TIMESTAMP                               DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES tUser(id)
 );
 
-
-insert into users (username, password,role, full_name, email) values ('admin', '$2y$10$CpbYkV1m.PTmqxbvFwQ5pu.B/h0GnGxEZVA2fNfJgaxVT4oND/N6S','manager', 'Giorgos Georgiou', 'admin@lms.com');
+insert into tUser (username, password,role, full_name, email) values ('admin', '$2y$10$VXZxkTeq0wZY9Qg0KQsoge4y6TxZxO5MLxEvGdj/Fs69SkEPphcBC','manager', 'Giorgos Georgiou', 'admin@lms.com');

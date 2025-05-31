@@ -34,6 +34,7 @@ $allRequests = $catalog->getAllRequests();
                     <th>End Date</th>
                     <th>Duration</th>
                     <th>Reason</th>
+                    <th>Submitted At</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -46,6 +47,7 @@ $allRequests = $catalog->getAllRequests();
                         <td><?= htmlspecialchars($request->getEndDate()->format('Y-m-d')) ?></td>
                         <td><?= $request->getDuration() ?> days</td>
                         <td><?= htmlspecialchars($request->getReason())?> </td>
+                        <td><?= htmlspecialchars($request->getSubmittedAt()->format('Y-m-d')) ?></td>
                         <td>
                             <span class="badge bg-<?= 
                                 $request->getStatus() === 'approved' ? 'success' : 

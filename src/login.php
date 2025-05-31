@@ -1,4 +1,5 @@
 <?php
+namespace App;
 require  $_SERVER['DOCUMENT_ROOT'] . '/init.php';
 
 $auth = new Auth();

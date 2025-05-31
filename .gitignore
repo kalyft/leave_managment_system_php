@@ -1,1 +1,3 @@
 .git_key
+vendor/
+.phpunit.result.cache

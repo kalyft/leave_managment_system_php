@@ -1,4 +1,5 @@
 <?php
+namespace App;
 //require_once 'Database.php';
 //require_once 'VacationRequest.php';
 //require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/VacationReason.php';
@@ -34,6 +35,8 @@ class VacationCatalog {
             (?, ?, ?, ?)"
         );
        return $stmt->execute([$request->getUserId(),$request->getStringStartDate(),$request->getStringEndDate(),$request->getReason()]);
+       //$request->setSubmittedAt(new DateTime());
+
     }
 
      /**
@@ -142,7 +145,7 @@ class VacationCatalog {
     private function createRequestFromRow($row) {
         $request = new VacationRequest($row['user_id'],$row['start_date'],$row['end_date'],$row['reason'],$row['status']);
         $request->setId($row['id']);
-        $request->setSubmittedAt($row['submitted_at']);
+        $request->setSubmittedAt( new DateTime($row['submitted_at']));
         
         // Add the employee name if it exists in the row
         if (isset($row['full_name'])) {

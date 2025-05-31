@@ -1,6 +1,6 @@
 <?php
 // Define the absolute application path
-
+namespace App;
 define('APP_ROOT', __DIR__);
 
 // Manually load Config class first since everything depends on it

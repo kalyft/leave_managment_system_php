@@ -7,11 +7,13 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www/html/src
+      - ./tests:/var/www/html/tests
+      - ./index.php:/var/www/html/index.php
     depends_on:
       - lms_db
     environment:
-      MYSQL_HOST: db
+      MYSQL_HOST: lms_db
       MYSQL_DATABASE: lms_db
       MYSQL_USER: debian-sys-maint
       MYSQL_PASSWORD: Rg6OzvMTokW76fQM

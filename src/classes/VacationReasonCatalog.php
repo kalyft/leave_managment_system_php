@@ -1,7 +1,8 @@
 <?php
-require_once 'Database.php';
-require_once 'VacationReason.php';
-
+namespace App;
+//require_once 'Database.php';
+//require_once 'VacationReason.php';
+// not used yet
 class VacationReasonCatalog {
     private $db;
     

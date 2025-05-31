@@ -1,0 +1,6 @@
+vendor/
+init-db/
+docker-compose.yml
+Dockerfile
+.phpunit.result.cache
+.git_key

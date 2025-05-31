@@ -1,0 +1,25 @@
+{
+    "name": "kfoti/leave_management_php",
+    "description": "Leave Management System",
+    "autoload": {
+        "psr-4": {
+            "Kfoti\\LeaveManagementPhp\\": "src/",
+            "App\\": "src/classes/"
+        }
+    },
+  
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kalypso Foti",
+            "email": "kalyft@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    }
+}

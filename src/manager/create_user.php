@@ -15,9 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user->setFullName($_POST['full_name']);
     
     $catalog = new UserCatalog();
-    if ($catalog->saveUser($user)) {
-         $success = "User Created";
-    } else {
+    try {
+        $catalog->saveUser($user);
+        $success = "User Created";
+    } catch (Exception $e) {
+        $error = $e->getMessage();
         $error = "Failed to create user.";
     }
 }

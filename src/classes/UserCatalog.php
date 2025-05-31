@@ -1,6 +1,7 @@
 <?php
-require_once 'Database.php';
-require_once 'User.php';
+namespace App;
+//require_once 'Database.php';
+//require_once 'User.php';
 
 class UserCatalog {
     private $db;

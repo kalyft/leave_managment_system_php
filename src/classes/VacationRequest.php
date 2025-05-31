@@ -1,6 +1,7 @@
 <?php
+namespace App;
 /*
-Vacation request class
+ * Vacation request class
 */
 class VacationRequest {
     private $db;
@@ -19,6 +20,7 @@ class VacationRequest {
         $this->userId = $userId;
         $this->startDate = new DateTime($startDate);;
         $this->endDate = new DateTime($endDate);
+        $this->submittedAt = new DateTime();
         $this->reason = $reason;
         $this->status = $status;
         $this->setDuration();
@@ -105,7 +107,7 @@ class VacationRequest {
         return $start->diff($end)->days + 1; // +1 to include both start and end dates
     }
 
-// go to catalog
+    // go to catalog
     public function getAllRequests() {
         $stmt = $this->db->prepare("SELECT vr.*, u.full_name FROM vacation_requests vr JOIN users u ON vr.user_id = u.id");
         $stmt->execute();

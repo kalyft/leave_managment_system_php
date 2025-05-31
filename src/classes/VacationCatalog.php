@@ -1,5 +1,4 @@
 <?php
-namespace App;
 //require_once 'Database.php';
 //require_once 'VacationRequest.php';
 //require_once $_SERVER['DOCUMENT_ROOT'] . '/classes/VacationReason.php';
@@ -35,8 +34,6 @@ class VacationCatalog {
             (?, ?, ?, ?)"
         );
        return $stmt->execute([$request->getUserId(),$request->getStringStartDate(),$request->getStringEndDate(),$request->getReason()]);
-       //$request->setSubmittedAt(new DateTime());
-
     }
 
      /**

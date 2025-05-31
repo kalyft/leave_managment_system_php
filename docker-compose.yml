@@ -7,9 +7,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html/src
-      - ./tests:/var/www/html/tests
-      - ./index.php:/var/www/html/index.php
+      - ./src:/var/www/html/
     depends_on:
       - lms_db
     environment:

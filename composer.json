@@ -7,7 +7,6 @@
             "App\\": "src/classes/"
         }
     },
-  
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

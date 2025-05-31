@@ -1,10 +1,4 @@
-
-<!DOCTYPE html>
-<html>
-<body>
 <?php
-
-// test_db.php
 require_once __DIR__ . '/init.php';
 
 try {
@@ -25,9 +19,11 @@ try {
         session_destroy();
 
 
-
-
-
+echo "
+<!DOCTYPE html>
+<html>
+<body>
+";
 
    echo dirname(__FILE__);
    echo "<br>";

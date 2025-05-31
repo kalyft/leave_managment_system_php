@@ -5,7 +5,6 @@ $auth = new Auth();
 $auth->redirectIfNotLoggedIn();
 $user = $auth->getCurrentUser();
 $catlog = new VacationCatalog();
-//$vacationReasonCatalog = new VacationReasonCatalog();
 
 // Handle new vacation request 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -74,7 +73,6 @@ $requests = $catlog->getUserRequests($user['id']);
                                 <option value="holiday">Annual Leave/Holiday</option>
                                 <option value="maternity_leave">Maternity Leave</option>
                                 <option value="paternity_leave">Paternity Leave</option>
-                                <option value="bereavement_leave">Bereavement Leave</option>
                             </select>
                         </div> 
                     </div>

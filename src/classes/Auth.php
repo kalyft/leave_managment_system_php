@@ -1,7 +1,4 @@
 <?php
-namespace App;
-//require_once  $_SERVER['DOCUMENT_ROOT'] . '/classes/User.php';
-
 class Auth {
     private $user;
 

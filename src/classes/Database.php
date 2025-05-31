@@ -1,6 +1,4 @@
 <?php
-namespace App;
-
 class Database {
     private $host;
     private $dbname;

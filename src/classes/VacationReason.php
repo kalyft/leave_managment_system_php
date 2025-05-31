@@ -1,5 +1,4 @@
 <?php
-namespace App;
 // extension not used yet
 enum VacationReasonCode: string {
     case HOLIDAY = 'HOL';

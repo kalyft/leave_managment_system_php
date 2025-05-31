@@ -12,7 +12,7 @@ class VacationRequestTest extends TestCase
 
     public function test_delete_pending()
     {
-        $request = new VacationRequest();
+        $request = new VacationRequest(1 ,'', '', 'sick_leave', 'pending');
         $request->setReasonKey('sick_leave');
         $this->assertFalse($request->requiresApproval());
     }

@@ -8,8 +8,10 @@ CREATE TABLE tUser (
     password   VARCHAR(255)                          NOT NULL,
     role       ENUM('employee', 'manager')           NOT NULL,
     full_name  VARCHAR(100)                          NOT NULL,
-    email      VARCHAR(255)                          NOT NULL,
-    created_at TIMESTAMP                                      DEFAULT CURRENT_TIMESTAMP
+    email      VARCHAR(255)                          NOT NULL UNIQUE,
+    created_at TIMESTAMP                                      DEFAULT CURRENT_TIMESTAMP,
+    INDEX iUser_email (email),
+    INDEX iUser_role (role)
 );
 
 -- Vacation requests
@@ -21,7 +23,10 @@ CREATE TABLE tVacationRequest (
     reason           ENUM('sick_leave', 'holiday', 'maternity_leave', 'paternity_leave') DEFAULT 'holiday' NOT NULL,
     status           ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
     submitted_at     TIMESTAMP                               DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES tUser(id)
+    FOREIGN KEY (user_id) REFERENCES tUser(id),
+    INDEX iVacationResquest_user_id (user_id),
+    INDEX iVacationRequest_submitted_at (submitted_at)
 );
 
-insert into tUser (username, password,role, full_name, email) values ('admin', '$2y$10$VXZxkTeq0wZY9Qg0KQsoge4y6TxZxO5MLxEvGdj/Fs69SkEPphcBC','manager', 'Giorgos Georgiou', 'admin@lms.com');
+insert into tUser (username, password,role, full_name, email) values 
+('admin', '$2y$10$VXZxkTeq0wZY9Qg0KQsoge4y6TxZxO5MLxEvGdj/Fs69SkEPphcBC','manager', 'Giorgos Georgiou', 'admin@lms.com');
